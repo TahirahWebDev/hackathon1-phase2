@@ -1,0 +1,206 @@
+openapi: 3.0.0
+info:
+  title: AI-native Textbook with RAG Chatbot API
+  version: 1.0.0
+  description: API for managing textbook content, interacting with the RAG chatbot, and handling user personalization.
+servers:
+  - url: http://localhost:8000/api/v1
+    description: Local development server
+paths:
+  /chat:
+    post:
+      summary: Ask the RAG chatbot a question.
+      description: Sends a user query to the RAG chatbot and receives a response based on textbook content.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChatRequest'
+      responses:
+        '200':
+          description: Successful chatbot response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChatResponse'
+        '400':
+          description: Invalid request or ambiguous query.
+        '503':
+          description: Chatbot service unavailable.
+  /personalize/preferences:
+    get:
+      summary: Get user personalization preferences.
+      description: Retrieves the learning preferences for an authenticated user.
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: User preferences retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserPreferences'
+        '401':
+          description: Unauthorized.
+    put:
+      summary: Update user personalization preferences.
+      description: Updates the learning preferences for an authenticated user.
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserPreferencesUpdate'
+      responses:
+        '200':
+          description: Preferences updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserPreferences'
+        '401':
+          description: Unauthorized.
+  /cms/ingest:
+    post:
+      summary: Ingest new textbook content.
+      description: Endpoint for the CMS to push new or updated textbook content to the RAG knowledge base.
+      security:
+        - ApiKeyAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CmsIngestRequest'
+      responses:
+        '202':
+          description: Content accepted for processing.
+        '401':
+          description: Unauthorized.
+        '403':
+          description: Forbidden - Invalid API Key.
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
+  schemas:
+    ChatRequest:
+      type: object
+      required:
+        - query_text
+      properties:
+        query_text:
+          type: string
+          description: The question from the user.
+          example: 'What is physical AI?'
+        context_text:
+          type: string
+          nullable: true
+          description: Optional selected text from the textbook for contextual questions.
+          example: 'Physical AI refers to ...'
+        language:
+          type: string
+          nullable: true
+          description: Optional preferred response language (e.g., 'ur' for Urdu).
+          enum: ['en', 'ur']
+          default: 'en'
+    ChatResponse:
+      type: object
+      required:
+        - response_text
+        - source_content_ids
+      properties:
+        response_text:
+          type: string
+          description: The AI chatbot's answer.
+          example: 'Physical AI is a field focusing on intelligent agents that interact with the physical world.'
+        source_content_ids:
+          type: array
+          items:
+            type: string
+          description: List of textbook content IDs that contributed to the answer.
+          example: ['chapter1-paragraph5', 'chapter1-section2-text3']
+    UserPreferences:
+      type: object
+      required:
+        - learning_style
+        - preferred_examples
+        - language_preference
+      properties:
+        learning_style:
+          type: string
+          description: User's preferred learning style.
+          example: 'visual'
+        preferred_examples:
+          type: array
+          items:
+            type: string
+          description: Preferred types of examples for personalized content.
+          example: ['code-heavy', 'diagrams']
+        language_preference:
+          type: string
+          description: Preferred language for personalized content (e.g., 'ur').
+          enum: ['en', 'ur']
+          default: 'en'
+    UserPreferencesUpdate:
+      type: object
+      properties:
+        learning_style:
+          type: string
+          description: User's preferred learning style.
+          example: 'visual'
+        preferred_examples:
+          type: array
+          items:
+            type: string
+          description: Preferred types of examples for personalized content.
+          example: ['code-heavy', 'diagrams']
+        language_preference:
+          type: string
+          description: Preferred language for personalized content (e.g., 'ur').
+          enum: ['en', 'ur']
+          default: 'en'
+    CmsIngestRequest:
+      type: object
+      required:
+        - content_id
+        - chapter_id
+        - text
+        - action
+      properties:
+        content_id:
+          type: string
+          description: Unique identifier for the content block.
+          example: 'intro-to-physical-ai-para1'
+        chapter_id:
+          type: string
+          description: Identifier for the chapter this content belongs to.
+          example: 'intro-to-physical-ai'
+        text:
+          type: string
+          description: The actual textbook content in markdown or plain text.
+          example: 'Physical AI is an emerging field...'
+        action:
+          type: string
+          description: Action to perform (e.g., 'create', 'update', 'delete').
+          enum: ['create', 'update', 'delete']
+        version:
+          type: string
+          description: Version of the content being ingested.
+          example: 'v1.0.0'
+        metadata:
+          type: object
+          additionalProperties: true
+          description: Additional metadata for the content.
+          example:
+            author: 'John Doe'
+            category: 'introduction'

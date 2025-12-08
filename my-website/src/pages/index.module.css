@@ -1,0 +1,262 @@
+:root{
+  /* Original Navy/Deep/Mid are replaced with Deep Green/Forest Green */
+  --navy: #06261a; /* Deep forest green (from your .footer) */
+  --deep: #0a3d25; /* Slightly lighter deep green */
+  --mid: #146e45; /* Richer mid-green */
+  
+  /* Original Neon is replaced with Teal/Light Green (from your --ifm-color-primary and lighter colors) */
+  --neon-a: #1fcf8a; /* Vibrant light teal/green (from your dark mode primary) */
+  --neon-b: #0d6c45; /* Darker primary green for contrast */
+  --glass: rgba(255,255,255,0.06);
+}
+
+/* HERO WRAPPER */
+.hero{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  min-height: 100vh;
+  padding: 3rem 2rem;
+  box-sizing: border-box;
+  /* Updated gradient using the new green variables */
+  background:
+    radial-gradient(800px 400px at 20% 50%, rgba(31, 207, 138, 0.08), transparent 30%), /* Neon-a with lower opacity */
+    linear-gradient(135deg, var(--navy) 0%, var(--deep) 50%, var(--mid) 100%);
+  color: #fff;
+  overflow: hidden;
+  animation: fadeIn 900ms ease-out both;
+}
+
+/* LEFT COLUMN - IMAGE */
+.left{
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 300px;
+  animation: slideUp 900ms cubic-bezier(.2,.9,.3,1) both;
+  animation-delay: 100ms;
+}
+
+/* RIGHT COLUMN - CONTENT */
+.right{
+  flex: 1;
+  min-width: 320px;
+  animation: slideUp 900ms cubic-bezier(.2,.9,.3,1) both;
+  animation-delay: 200ms;
+}
+
+/* BADGE */
+.badge{
+  display: inline-block;
+  padding: 0.5rem 1.2rem;
+  border-radius: 50px;
+  /* Changed blue to green-teal */
+  background: rgba(31, 207, 138, 0.08); 
+  border: 1px solid rgba(31, 207, 138, 0.16); 
+  color: rgba(31, 207, 138, 0.9);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+  backdrop-filter: blur(8px);
+  /* Darker shadow for contrast */
+  box-shadow: 0 4px 20px rgba(0, 30, 10, 0.4); 
+}
+
+/* TITLE */
+.title{
+  font-weight: 800;
+  line-height: 1.1;
+  font-size: 3.8rem;
+  margin: 0 0 1rem 0;
+  letter-spacing: -0.02em;
+  text-shadow: 0 6px 30px rgba(6,9,30,0.6);
+  font-size: 45px;
+}
+
+/* ANIMATED GRADIENT TEXT */
+.gradient{
+  /* Updated gradient with green/teal colors */
+  background: linear-gradient(90deg, var(--neon-a), var(--neon-b), #68e7c1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+  background-size: 200% 200%;
+  animation: gradientShift 3.5s linear infinite;
+}
+
+/* SUBTITLE */
+.subtitle{
+  margin: 0 0 1.8rem 0;
+  color: rgba(255,255,255,0.86);
+  font-size: 1.1rem;
+  max-width: 56ch;
+  opacity: 0.95;
+  text-shadow: 0 3px 18px rgba(6,9,30,0.45);
+  line-height: 1.6;
+}
+
+/* GLASS CARD - FEATURE BADGES */
+.glassCard{
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 2.2rem;
+  padding: 0;
+  flex-wrap: wrap;
+}
+
+.glassCard p{
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.2rem;
+  border-radius: 50px;
+  /* Changed blue to green-teal */
+  background: rgba(31, 207, 138, 0.08);
+  border: 1px solid rgba(31, 207, 138, 0.14);
+  color: rgba(230, 255, 245, 0.9); /* Slightly greenish white */
+  font-size: 0.95rem;
+  font-weight: 600;
+  backdrop-filter: blur(8px);
+  /* Darker shadow for contrast */
+  box-shadow: 0 4px 20px rgba(0, 30, 10, 0.4); 
+  transition: all 0.3s cubic-bezier(0.2, 0.9, 0.3, 1);
+  white-space: nowrap;
+  margin: 0;
+}
+
+.glassCard p:hover{
+  /* Changed blue to green-teal */
+  background: rgba(31, 207, 138, 0.14);
+  border-color: rgba(31, 207, 138, 0.24);
+  box-shadow: 0 8px 40px rgba(31, 207, 138, 0.12);
+  transform: translateY(-2px);
+}
+
+/* BUTTONS remain the same */
+.buttons{
+  display: flex;
+  gap: 1.2rem;
+  align-items: center;
+  margin-top: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.primaryButton,
+.secondaryButton{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.9rem 1.8rem;
+  border-radius: 50px;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.2, 0.9, 0.3, 1);
+  will-change: transform, box-shadow;
+  border: none;
+  font-size: 1rem;
+}
+
+/* PRIMARY: solid white */
+.primaryButton{
+  background: #ffffff;
+  color: var(--navy); /* Use the deep green color */
+  box-shadow: 0 8px 30px rgba(255, 255, 255, 0.2);
+}
+
+.primaryButton:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 12px 50px rgba(255, 255, 255, 0.3);
+  background: #f0f0f0;
+}
+
+/* SECONDARY: glass border - Changed blue to green-teal */
+.secondaryButton{
+  background: transparent;
+  border: 2px solid rgba(31, 207, 138, 0.4); /* Green/Teal border */
+  color: #ffffff;
+  box-shadow: 0 8px 30px rgba(31, 207, 138, 0.1);
+  backdrop-filter: blur(8px);
+}
+
+.secondaryButton:hover{
+  border-color: rgba(31, 207, 138, 0.8);
+  box-shadow: 0 12px 50px rgba(31, 207, 138, 0.25);
+  background: rgba(31, 207, 138, 0.06);
+  transform: translateY(-2px);
+}
+
+/* HERO IMAGE - Changed blue to green-teal */
+.heroImage{
+  width: 100%;
+  max-width: 450px;
+  border-radius: 16px;
+  filter: drop-shadow(0 20px 60px rgba(0, 30, 10, 0.6)); /* Dark green shadow */
+  animation: float 6s ease-in-out infinite alternate;
+  box-shadow: 0 0 40px rgba(31, 207, 138, 0.1); /* Green/Teal glow */
+}
+.heroImage:hover {
+  transform: scale(1.06) rotateZ(1.5deg) translateY(-6px);
+  filter: drop-shadow(0 25px 70px rgba(0,50,14,0.5)); /* Darker green shadow on hover */
+  box-shadow: 0 18px 70px rgba(0,50,14,0.45), 0 0 55px rgba(31, 207, 138, 0.12); /* Green/Teal glow on hover */
+  transition: 0.3s;
+}
+
+/* Section Title - Changed blue to green-teal */
+.sectionTitle {
+  font-size: 38px;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 25px;
+  background: linear-gradient(90deg, #32d99a, #0f7b4f); /* Green/Teal gradient */
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+/* ---------------- SECTION 1 ---------------- */
+.featuresSection {
+  /* Kept light background for contrast */
+  padding: 80px 20px;
+  background: #f8f9ff; 
+}
+
+.featuresContainer {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.featuresGrid {
+  display: grid;
+  gap: 25px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  margin-top: 40px;
+}
+
+.featureCard {
+  padding: 25px;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.5);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.07);
+  transition: 0.35s ease;
+}
+
+.featureCard:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.12);
+}
+
+.featureCard h3 {
+  font-size: 22px;
+  margin-bottom: 10px;
+}
+
+
+/* KEYFRAMES & RESPONSIVE styles remain unchanged as they are animation/layout-related */
+/* ... (Animations and Media Queries) ... */

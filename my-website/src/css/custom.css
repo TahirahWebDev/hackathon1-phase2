@@ -1,0 +1,28 @@
+/* -----------------------------
+    GLOBAL THEME VARIABLES (LIGHT)
+--------------------------------*/
+:root {
+  /* Primary dark-green palette */
+  --ifm-color-primary: #0f7b4f;
+  /* ... other light mode variables */
+  /* Links */
+  --ifm-link-color: #0f7b4f;
+}
+
+/* -----------------------------
+    DARK MODE VARIABLES
+--------------------------------*/
+[data-theme='dark'] {
+  --ifm-color-primary: #1fcf8a;
+  /* ... other dark mode variables */
+  /* Links */
+  --ifm-link-color: #32d99a;
+}
+
+/* -----------------------------
+           FOOTER
+--------------------------------*/
+.footer {
+  background-color: #06261a !important; /* Deep forest green */
+  /* ... other footer styles */
+}
