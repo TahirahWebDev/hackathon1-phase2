@@ -28,7 +28,7 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "http://localhost:3000",
-        "https://physical-ai-humanoid-robotics-epnr.vercel.app" # Your Vercel URL
+        "https://hackathon1-phase2.vercel.app/" # Your Vercel URL
     ],
     allow_credentials=True,
     allow_methods=["*"],
