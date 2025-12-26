@@ -1,18 +1,18 @@
 {
-  "rewrites": [
-    {
-      "source": "/(.*)",
-      "destination": "/index.html"
-    }
-  ],
+  "version": 2,
   "builds": [
     {
-      "src": "package.json",
-      "use": "@vercel/static-build",
+      "src": "main.py",
+      "use": "@vercel/python",
       "config": {
-        "installCommand": "npm install",
-        "buildCommand": "npm run build"
+        "runtime": "python3.11"
       }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "main.py"
     }
   ]
 }

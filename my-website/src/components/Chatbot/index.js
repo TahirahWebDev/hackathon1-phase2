@@ -34,8 +34,14 @@ const Chatbot = () => {
     setLoading(true);
 
     try {
-      // Use the exact backend URL
-      const apiUrl = 'http://127.0.0.1:8000/api/v1/chat'; // Backend is running on 127.0.0.1:8000
+      // Determine API URL based on environment
+      const isDev = typeof window !== 'undefined' &&
+                   (window.location.hostname === 'localhost' ||
+                    window.location.hostname === '127.0.0.1');
+
+      const apiUrl = isDev
+        ? 'http://127.0.0.1:8000/api/v1/chat'  // Local development
+        : (process.env.REACT_APP_API_URL || 'https://your-vercel-deployment-url.vercel.app/api/v1/chat'); // Production Vercel URL
 
       // Call the backend API
       const response = await fetch(apiUrl, {

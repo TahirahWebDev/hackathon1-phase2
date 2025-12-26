@@ -18,10 +18,28 @@ from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 
 
+# Create FastAPI app at module level for Vercel compatibility
+app = FastAPI(title="RAG Content Ingestion Pipeline API",
+              description="API for ingesting and retrieving documentation content using RAG",
+              version="1.0.0")
+
+# Add CORS middleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Allow all origins temporarily for testing
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# Include the chat router
+app.include_router(router, prefix="/api/v1", tags=["chat"])
+
+
 def setup_logging(level: str = "INFO"):
     """
     Set up logging configuration.
-    
+
     Args:
         level: Logging level as a string (default: "INFO")
     """
@@ -40,50 +58,33 @@ def main():
     parser.add_argument("--host", type=str, default="127.0.0.1", help="Host to bind to (default: 127.0.0.1)")
     parser.add_argument("--port", type=int, default=8000, help="Port to run the server on (default: 8000)")
     parser.add_argument("--log-level", type=str, default="INFO", help="Logging level (default: INFO)")
-    
+
     args = parser.parse_args()
-    
+
     # Set up logging
     setup_logging(args.log_level)
     logger = logging.getLogger(__name__)
-    
+
     try:
         # Load configuration
         config = get_config()
-        
+
         # Initialize services
         qdrant_service = QdrantConnectionService()
         retrieval_service = RetrievalService(qdrant_service)
         agent_service = AgentService(retrieval_service)
-        
+
         # Initialize the agent
-        agent_service.initialize_agent(api_key=config.get("OPENAI_API_KEY"))
-        
-        # Create FastAPI app
-        app = FastAPI(title="RAG Content Ingestion Pipeline API",
-                      description="API for ingesting and retrieving documentation content using RAG",
-                      version="1.0.0")
+        agent_service.initialize_agent(api_key=config.get("GEMINI_API_KEY"))
 
-        # Add CORS middleware
-        app.add_middleware(
-            CORSMiddleware,
-            allow_origins=["*"],  # Allow all origins temporarily for testing
-            allow_credentials=True,
-            allow_methods=["*"],
-            allow_headers=["*"],
-        )
-
-        # Include the chat router
-        app.include_router(router, prefix="/api/v1", tags=["chat"])
-        
         logger.info(f"Starting server on {args.host}:{args.port}")
         logger.info(f"Logging level: {args.log_level}")
-        
+
         # Run the server
         uvicorn.run(app, host=args.host, port=args.port)
-        
+
         return 0
-        
+
     except KeyboardInterrupt:
         logger.info("Server stopped by user")
         return 0
