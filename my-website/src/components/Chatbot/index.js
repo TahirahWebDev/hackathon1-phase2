@@ -41,7 +41,7 @@ const Chatbot = () => {
 
       const apiUrl = isDev
         ? 'http://127.0.0.1:8000/api/v1/chat'  // Local development
-        : (process.env.REACT_APP_API_URL || 'https://your-vercel-deployment-url.vercel.app/api/v1/chat'); // Production Vercel URL
+        : (process.env.REACT_APP_API_URL || 'https://hackathon1-phase2.vercel.app/'); // Production Vercel URL
 
       // Call the backend API
       const response = await fetch(apiUrl, {
