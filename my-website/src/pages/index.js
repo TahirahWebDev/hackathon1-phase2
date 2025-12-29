@@ -1,9 +1,3 @@
-// 
-
-
-
-
-
 import Link from '@docusaurus/Link';
 import Layout from '@theme/Layout';
 import styles from './index.module.css';
@@ -12,15 +6,11 @@ export default function Home() {
   return (
     <Layout title="AI Native" description="Learn AI through a modern book-style website">
       <main className={styles.hero}>
-        <div className={styles.left}>
-          <img
-            src="img/hero.png"
-            alt="Neon AI book and brain illustration"
-            className={styles.heroImage}
-          />
-        </div>
 
-        <div className={styles.right}>
+        {/* IMAGE REMOVED */}
+        {/* <div className={styles.left}>...</div> */}
+
+        <div className={styles.rightCentered}>
           <div className={styles.badge}>
             AI-NATIVE BOOK SERIES
           </div>
@@ -48,10 +38,10 @@ export default function Home() {
             </Link>
           </div>
         </div>
+
       </main>
 
-
-      {/* -------------------- PREMIUM SECTION 1 -------------------- */}
+      {/* PREMIUM SECTION (unchanged) */}
       <section className={styles.featuresSection}>
         <div className={styles.featuresContainer}>
           <h2 className={styles.sectionTitle}>Why This AI Book Stands Out?</h2>
@@ -74,9 +64,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-
-
 
     </Layout>
   );

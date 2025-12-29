@@ -1,12 +1,10 @@
 :root{
-  /* Original Navy/Deep/Mid are replaced with Deep Green/Forest Green */
-  --navy: #06261a; /* Deep forest green (from your .footer) */
-  --deep: #0a3d25; /* Slightly lighter deep green */
-  --mid: #146e45; /* Richer mid-green */
-  
-  /* Original Neon is replaced with Teal/Light Green (from your --ifm-color-primary and lighter colors) */
-  --neon-a: #1fcf8a; /* Vibrant light teal/green (from your dark mode primary) */
-  --neon-b: #0d6c45; /* Darker primary green for contrast */
+  --navy: #06261a;
+  --deep: #0a3d25;
+  --mid: #146e45;
+
+  --neon-a: #1fcf8a;
+  --neon-b: #0d6c45;
   --glass: rgba(255,255,255,0.06);
 }
 
@@ -14,37 +12,33 @@
 .hero{
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center; /* CENTER CONTENT */
   gap: 2rem;
   min-height: 100vh;
   padding: 3rem 2rem;
   box-sizing: border-box;
-  /* Updated gradient using the new green variables */
+
   background:
-    radial-gradient(800px 400px at 20% 50%, rgba(31, 207, 138, 0.08), transparent 30%), /* Neon-a with lower opacity */
+    radial-gradient(800px 400px at 20% 50%, rgba(31, 207, 138, 0.08), transparent 30%),
     linear-gradient(135deg, var(--navy) 0%, var(--deep) 50%, var(--mid) 100%);
   color: #fff;
   overflow: hidden;
   animation: fadeIn 900ms ease-out both;
 }
 
-/* LEFT COLUMN - IMAGE */
+/* LEFT COLUMN - IMAGE (HIDDEN NOW) */
 .left{
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 300px;
-  animation: slideUp 900ms cubic-bezier(.2,.9,.3,1) both;
-  animation-delay: 100ms;
+  display: none; /* REMOVED */
 }
 
-/* RIGHT COLUMN - CONTENT */
-.right{
-  flex: 1;
+/* RIGHT COLUMN - CONTENT (CENTERED) */
+.rightCentered{
+  flex: 0 1 700px;
   min-width: 320px;
   animation: slideUp 900ms cubic-bezier(.2,.9,.3,1) both;
   animation-delay: 200ms;
+  text-align: center; /* CENTER TEXT */
+  margin: 0 auto;
 }
 
 /* BADGE */
@@ -52,9 +46,8 @@
   display: inline-block;
   padding: 0.5rem 1.2rem;
   border-radius: 50px;
-  /* Changed blue to green-teal */
-  background: rgba(31, 207, 138, 0.08); 
-  border: 1px solid rgba(31, 207, 138, 0.16); 
+  background: rgba(31, 207, 138, 0.08);
+  border: 1px solid rgba(31, 207, 138, 0.16);
   color: rgba(31, 207, 138, 0.9);
   font-size: 0.8rem;
   font-weight: 700;
@@ -62,24 +55,21 @@
   text-transform: uppercase;
   margin-bottom: 1.5rem;
   backdrop-filter: blur(8px);
-  /* Darker shadow for contrast */
-  box-shadow: 0 4px 20px rgba(0, 30, 10, 0.4); 
+  box-shadow: 0 4px 20px rgba(0, 30, 10, 0.4);
 }
 
 /* TITLE */
 .title{
   font-weight: 800;
   line-height: 1.1;
-  font-size: 3.8rem;
+  font-size: 45px;
   margin: 0 0 1rem 0;
   letter-spacing: -0.02em;
   text-shadow: 0 6px 30px rgba(6,9,30,0.6);
-  font-size: 45px;
 }
 
 /* ANIMATED GRADIENT TEXT */
 .gradient{
-  /* Updated gradient with green/teal colors */
   background: linear-gradient(90deg, var(--neon-a), var(--neon-b), #68e7c1);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -90,7 +80,7 @@
 
 /* SUBTITLE */
 .subtitle{
-  margin: 0 0 1.8rem 0;
+  margin: 0 auto 1.8rem auto;
   color: rgba(255,255,255,0.86);
   font-size: 1.1rem;
   max-width: 56ch;
@@ -99,11 +89,12 @@
   line-height: 1.6;
 }
 
-/* GLASS CARD - FEATURE BADGES */
+/* GLASS CARD */
 .glassCard{
   display: flex;
   gap: 1rem;
   align-items: center;
+  justify-content: center; /* CENTER BADGES */
   margin-bottom: 2.2rem;
   padding: 0;
   flex-wrap: wrap;
@@ -115,33 +106,31 @@
   gap: 0.5rem;
   padding: 0.65rem 1.2rem;
   border-radius: 50px;
-  /* Changed blue to green-teal */
   background: rgba(31, 207, 138, 0.08);
   border: 1px solid rgba(31, 207, 138, 0.14);
-  color: rgba(230, 255, 245, 0.9); /* Slightly greenish white */
+  color: rgba(230, 255, 245, 0.9);
   font-size: 0.95rem;
   font-weight: 600;
   backdrop-filter: blur(8px);
-  /* Darker shadow for contrast */
-  box-shadow: 0 4px 20px rgba(0, 30, 10, 0.4); 
+  box-shadow: 0 4px 20px rgba(0, 30, 10, 0.4);
   transition: all 0.3s cubic-bezier(0.2, 0.9, 0.3, 1);
   white-space: nowrap;
   margin: 0;
 }
 
 .glassCard p:hover{
-  /* Changed blue to green-teal */
   background: rgba(31, 207, 138, 0.14);
   border-color: rgba(31, 207, 138, 0.24);
   box-shadow: 0 8px 40px rgba(31, 207, 138, 0.12);
   transform: translateY(-2px);
 }
 
-/* BUTTONS remain the same */
+/* BUTTONS */
 .buttons{
   display: flex;
   gap: 1.2rem;
   align-items: center;
+  justify-content: center; /* CENTER BUTTONS */
   margin-top: 0.5rem;
   flex-wrap: wrap;
 }
@@ -157,15 +146,13 @@
   text-decoration: none;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.2, 0.9, 0.3, 1);
-  will-change: transform, box-shadow;
   border: none;
   font-size: 1rem;
 }
 
-/* PRIMARY: solid white */
 .primaryButton{
   background: #ffffff;
-  color: var(--navy); /* Use the deep green color */
+  color: var(--navy);
   box-shadow: 0 8px 30px rgba(255, 255, 255, 0.2);
 }
 
@@ -175,10 +162,9 @@
   background: #f0f0f0;
 }
 
-/* SECONDARY: glass border - Changed blue to green-teal */
 .secondaryButton{
   background: transparent;
-  border: 2px solid rgba(31, 207, 138, 0.4); /* Green/Teal border */
+  border: 2px solid rgba(31, 207, 138, 0.4);
   color: #ffffff;
   box-shadow: 0 8px 30px rgba(31, 207, 138, 0.1);
   backdrop-filter: blur(8px);
@@ -191,55 +177,37 @@
   transform: translateY(-2px);
 }
 
-/* HERO IMAGE - Changed blue to green-teal */
-.heroImage{
-  width: 100%;
-  max-width: 450px;
-  border-radius: 16px;
-  filter: drop-shadow(0 20px 60px rgba(0, 30, 10, 0.6)); /* Dark green shadow */
-  animation: float 6s ease-in-out infinite alternate;
-  box-shadow: 0 0 40px rgba(31, 207, 138, 0.1); /* Green/Teal glow */
-}
-.heroImage:hover {
-  transform: scale(1.06) rotateZ(1.5deg) translateY(-6px);
-  filter: drop-shadow(0 25px 70px rgba(0,50,14,0.5)); /* Darker green shadow on hover */
-  box-shadow: 0 18px 70px rgba(0,50,14,0.45), 0 0 55px rgba(31, 207, 138, 0.12); /* Green/Teal glow on hover */
-  transition: 0.3s;
-}
-
-/* Section Title - Changed blue to green-teal */
+/* FEATURE SECTION */
 .sectionTitle {
   font-size: 38px;
   font-weight: 800;
   text-align: center;
   margin-bottom: 25px;
-  background: linear-gradient(90deg, #32d99a, #0f7b4f); /* Green/Teal gradient */
+  background: linear-gradient(90deg, #32d99a, #0f7b4f);
   -webkit-background-clip: text;
   color: transparent;
 }
 
-/* ---------------- SECTION 1 ---------------- */
-.featuresSection {
-  /* Kept light background for contrast */
+.featuresSection{
   padding: 80px 20px;
-  background: #f8f9ff; 
+  background: #f8f9ff;
 }
 
-.featuresContainer {
+.featuresContainer{
   max-width: 1100px;
   margin: 0 auto;
 }
 
-.featuresGrid {
+.featuresGrid{
   display: grid;
   gap: 25px;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   margin-top: 40px;
 }
 
-.featureCard {
+.featureCard{
   padding: 25px;
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(255,255,255,0.8);
   backdrop-filter: blur(12px);
   border-radius: 20px;
   border: 1px solid rgba(255,255,255,0.5);
@@ -247,16 +215,28 @@
   transition: 0.35s ease;
 }
 
-.featureCard:hover {
+.featureCard:hover{
   transform: translateY(-8px);
   box-shadow: 0 15px 30px rgba(0,0,0,0.12);
 }
 
-.featureCard h3 {
+.featureCard h3{
   font-size: 22px;
   margin-bottom: 10px;
 }
 
+/* Animations (unchanged) */
+@keyframes gradientShift{
+  0%{background-position: 0% 50%;}
+  100%{background-position: 100% 50%;}
+}
 
-/* KEYFRAMES & RESPONSIVE styles remain unchanged as they are animation/layout-related */
-/* ... (Animations and Media Queries) ... */
+@keyframes fadeIn{
+  from{opacity: 0; transform: translateY(20px);}
+  to{opacity: 1; transform: translateY(0);}
+}
+
+@keyframes slideUp{
+  from{opacity: 0; transform: translateY(30px);}
+  to{opacity: 1; transform: translateY(0);}
+}
